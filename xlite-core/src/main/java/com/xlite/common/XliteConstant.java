@@ -10,16 +10,29 @@ package com.xlite.common;
  **/
 public class XliteConstant {
 
-
+    /**
+     * 默认绑定端口
+     */
+    public static final int DEFAULT_PORT = 20660;
 
     /**
-     * other
+     * 版本
      */
-    public final static byte FLAG_OTHER = (byte) 0xFF;
+    public final static byte VERSION = 0x01;
 
-    public final static byte VERSION = 0X01;
+    /**
+     * 响应异常
+     */
+    public final static int RESPONSE_EXCEPTION = 1;
 
+    /**
+     * 返回为空
+     */
+    public final static int RESPONSE_VOID = 2;
 
-
+    /**
+     * 正常返回值
+     */
+    public final static int RESPONSE_NORMAL = 3;
 
 }

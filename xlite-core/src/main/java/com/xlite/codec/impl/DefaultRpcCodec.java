@@ -2,6 +2,8 @@ package com.xlite.codec.impl;
 
 import com.xlite.codec.Codec;
 import com.xlite.common.ByteUtils;
+import com.xlite.common.ReflectUtil;
+import com.xlite.common.XliteConstant;
 import com.xlite.remoting.exchange.Request;
 import com.xlite.remoting.exchange.Response;
 import com.xlite.rpc.RpcException;
@@ -78,7 +80,7 @@ public class DefaultRpcCodec extends AbstractRpcCodec implements Codec {
         }
 
         //协议版本号校验
-        if((byte) 1 != bytes[offset += 2]){
+        if(XliteConstant.VERSION != bytes[offset += 2]){
             throw new RpcException("decode error: version error",RpcException.DECODE_EXCEPTION);
         }
 
@@ -166,7 +168,7 @@ public class DefaultRpcCodec extends AbstractRpcCodec implements Codec {
         offset += 2;
 
         //写入版本号(16-23 bit)
-        header[offset++] = (byte) 1;
+        header[offset++] = XliteConstant.VERSION;
 
         //写入扩展标记位(24-31 bit)
         if(isRequest){
@@ -199,9 +201,19 @@ public class DefaultRpcCodec extends AbstractRpcCodec implements Codec {
         //方法调用处理耗时
         output.writeLong(response.getProcessTime());
 
-        //响应结果类型
-        output.writeUTF(response.getValue().getClass().getName());
-        serialize(output,serialization,response.getValue());
+        //根据结果类型，分别写入
+        if(response.getException() != null){
+            output.writeInt(XliteConstant.RESPONSE_EXCEPTION);
+            output.writeUTF(response.getException().getClass().getName());
+            serialize(output,serialization,response.getException());
+        }else if(response.getValue() == null){
+            output.writeInt(XliteConstant.RESPONSE_VOID);
+        }else {
+            output.writeInt(XliteConstant.RESPONSE_NORMAL);
+            output.writeUTF(response.getValue().getClass().getName());
+            serialize(output,serialization,response.getValue());
+        }
+
         output.flush();
 
         //请求报文体
@@ -255,8 +267,39 @@ public class DefaultRpcCodec extends AbstractRpcCodec implements Codec {
      * @param serialization
      * @return
      */
-    private Response decodeResponse(byte[] bytes,long requestId,Serialization serialization){
-        RpcResponse response = new RpcResponse(null);
+    private Response decodeResponse(byte[] bytes,long requestId,Serialization serialization) throws IOException, ClassNotFoundException {
+        ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+        ObjectInput input = new ObjectInputStream(bis);
+
+        RpcResponse response = new RpcResponse();
+
+        //业务处理耗时
+        long processTime = input.readLong();
+        response.setProcessTime(processTime);
+        response.setRequestId(requestId);
+
+        //结果类型为空
+        int dataType = input.readInt();
+        if(dataType == XliteConstant.RESPONSE_VOID){
+            return response;
+        }
+
+        //响应结果Class类型,响应value
+        String className = input.readUTF();
+        Class<?> clazz = ReflectUtil.forName(className);
+        Object value = deserialize((byte[]) input.readObject(),clazz,serialization);
+
+        //结果有异常
+        if(dataType == XliteConstant.RESPONSE_EXCEPTION){
+            response.setException((Exception) value);
+        }else if(dataType == XliteConstant.RESPONSE_NORMAL){
+            response.setValue(value);
+        }else {
+            throw new RpcException("decode error: response dataType not support " + dataType,RpcException.DECODE_EXCEPTION);
+        }
+
+        input.close();
+
         return response;
     }
 }

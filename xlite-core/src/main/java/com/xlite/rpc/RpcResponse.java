@@ -35,6 +35,10 @@ public class RpcResponse implements Response, Serializable {
      */
     private long processTime;
 
+    public RpcResponse(){
+
+    }
+
     public RpcResponse(Object value){
         this.value = value;
     }

@@ -35,6 +35,22 @@ public abstract class AbstractRpcCodec {
     }
 
     /**
+     * 反序列化对象
+     * @param bytes
+     * @param classType
+     * @param serialization
+     * @return
+     * @throws IOException
+     */
+    protected Object deserialize(byte[] bytes,Class<?> classType,Serialization serialization) throws IOException {
+        if(bytes == null){
+            return null;
+        }
+
+        return serialization.deserialize(bytes,classType);
+    }
+
+    /**
      * 解码方法调用参数
      * @param input
      * @param parametersDesc

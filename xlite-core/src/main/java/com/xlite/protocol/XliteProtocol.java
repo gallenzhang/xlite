@@ -1,7 +1,7 @@
 package com.xlite.protocol;
 
 import com.xlite.common.NetUtils;
-import com.xlite.protocol.xlite.Constants;
+import com.xlite.common.XliteConstant;
 import com.xlite.protocol.xlite.XliteExporter;
 import com.xlite.remoting.NettyServer;
 import com.xlite.rpc.Exporter;
@@ -40,7 +40,7 @@ public class XliteProtocol implements Protocol {
      * 开启服务端
      */
     private void openServer(){
-        String key = NetUtils.getIP() + ":" + Constants.DEFAULT_PORT;
+        String key = NetUtils.getIP() + ":" + XliteConstant.DEFAULT_PORT;
         if(serverMap.get(key) == null){
             NettyServer server = new NettyServer();
             serverMap.put(key,server);

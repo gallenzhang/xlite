@@ -2,7 +2,7 @@ package com.xlite.remoting;
 
 import com.xlite.codec.RequestCodecHandler;
 import com.xlite.codec.RequestFrameDecoder;
-import com.xlite.protocol.xlite.Constants;
+import com.xlite.common.XliteConstant;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.Channel;
@@ -61,7 +61,7 @@ public class NettyServer {
                 });
 
         //绑定
-        ChannelFuture channelFuture = bootstrap.bind(Constants.DEFAULT_PORT);
+        ChannelFuture channelFuture = bootstrap.bind(XliteConstant.DEFAULT_PORT);
         channelFuture.syncUninterruptibly();
         channel = channelFuture.channel();
     }
