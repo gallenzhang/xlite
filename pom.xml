@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.xlite</groupId>
+    <artifactId>xlite-parent</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>${project.artifactId}</name>
+    <description>The parent project of xlite</description>
+    <url>https://github.com/gallenzhang/xlite</url>
+    <inceptionYear>2019</inceptionYear>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <properties>
+        <junit.version>4.12</junit.version>
+        <mockito.version>2.18.3</mockito.version>
+        <fastjson.version>1.2.60</fastjson.version>
+        <hessian.version>4.0.38</hessian.version>
+        <netty.version>4.0.35.Final</netty.version>
+
+
+        <!-- maven compiler plugin-->
+        <java.source.version>1.8</java.source.version>
+        <java.target.version>1.8</java.target.version>
+        <file.encoding>UTF-8</file.encoding>
+
+        <!-- maven plugins-->
+        <maven.compiler.version>3.6.0</maven.compiler.version>
+        <maven.source.version>3.0.1</maven.source.version>
+        <maven.jar.version>3.0.2</maven.jar.version>
+    </properties>
+
+
+    <modules>
+        <module>xlite-demo</module>
+        <module>xlite-core</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.caucho</groupId>
+                <artifactId>hessian</artifactId>
+                <version>${hessian.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven.source.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven.jar.version}</version>
+                <configuration>
+                    <archive>
+                        <addMavenDescriptor>true</addMavenDescriptor>
+                        <index>true</index>
+                        <manifest>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Specification-Version>${project.version}</Specification-Version>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
