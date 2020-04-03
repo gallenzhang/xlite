@@ -12,7 +12,7 @@ public class Provider {
 
     public static void main(String[] args) {
         DemoService demoService = new DemoServiceImpl();
-        ServiceConfig<DemoService> serviceConfig = new ServiceConfig<>(DemoService.class, demoService);
+        ServiceConfig<DemoService> serviceConfig = new ServiceConfig<DemoService>(DemoService.class, demoService);
 
         //暴露服务
         serviceConfig.export();

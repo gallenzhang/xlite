@@ -12,7 +12,7 @@ import com.xlite.demo.PersonBean;
 public class Consumer {
 
     public static void main(String[] args) {
-        ReferenceConfig<DemoService> referenceConfig = new ReferenceConfig<>(DemoService.class);
+        ReferenceConfig<DemoService> referenceConfig = new ReferenceConfig<DemoService>(DemoService.class);
         //xlite://172.22.57.24:20360
         referenceConfig.setUrl("172.22.57.24:20360");
         DemoService demoService = referenceConfig.get();
