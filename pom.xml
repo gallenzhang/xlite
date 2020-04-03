@@ -26,7 +26,7 @@
         <mockito.version>2.18.3</mockito.version>
         <fastjson.version>1.2.60</fastjson.version>
         <hessian.version>4.0.38</hessian.version>
-        <netty.version>4.0.35.Final</netty.version>
+        <netty.version>4.1.42.Final</netty.version>
 
 
         <!-- maven compiler plugin-->
