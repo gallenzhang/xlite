@@ -3,6 +3,7 @@ package com.xlite.rpc;
 import com.xlite.remoting.exchange.Request;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
@@ -138,4 +139,15 @@ public class RpcRequest implements Request ,Serializable {
         this.requestId = requestId;
     }
 
+    @Override
+    public String toString() {
+        return "RpcRequest{" +
+                "requestId=" + requestId +
+                ", interfaceName='" + interfaceName + '\'' +
+                ", methodName='" + methodName + '\'' +
+                ", parametersDesc='" + parametersDesc + '\'' +
+                ", arguments=" + Arrays.toString(arguments) +
+                ", attachments=" + attachments +
+                '}';
+    }
 }

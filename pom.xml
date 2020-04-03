@@ -27,7 +27,11 @@
         <fastjson.version>1.2.60</fastjson.version>
         <hessian.version>4.0.38</hessian.version>
         <netty.version>4.1.48.Final</netty.version>
-
+        <slf4j.version>1.5.8</slf4j.version>
+        <log4j.version>1.2.14</log4j.version>
+        <commons.lang3.version>3.1</commons.lang3.version>
+        <commons.codec.version>1.4</commons.codec.version>
+        <spring.version>4.3.26.RELEASE</spring.version>
 
         <!-- maven compiler plugin-->
         <java.source.version>1.8</java.source.version>
@@ -80,6 +84,37 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>${mockito.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons.lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons.codec.version}</version>
         </dependency>
     </dependencies>
 

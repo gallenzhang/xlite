@@ -95,4 +95,14 @@ public class RpcResponse implements Response, Serializable {
     public void setProcessTime(long processTime) {
         this.processTime = processTime;
     }
+
+    @Override
+    public String toString() {
+        return "RpcResponse{" +
+                "value=" + value +
+                ", exception=" + exception +
+                ", requestId=" + requestId +
+                ", processTime=" + processTime +
+                '}';
+    }
 }

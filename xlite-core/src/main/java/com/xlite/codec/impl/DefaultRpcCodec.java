@@ -148,7 +148,7 @@ public class DefaultRpcCodec extends AbstractRpcCodec implements Codec {
         byte[] requestData = new byte[requestHeader.length + requestBody.length];
         System.arraycopy(requestHeader,0,requestData,0,requestHeader.length);
         System.arraycopy(requestBody,0,requestData,requestHeader.length,requestBody.length);
-        return requestBody;
+        return requestData;
     }
 
     /**

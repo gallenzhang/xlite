@@ -1,6 +1,9 @@
 package com.xlite.common;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.lang.reflect.Array;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,6 +22,13 @@ public class ReflectUtil {
      * 分隔符
      */
     public static final String PARAM_CLASS_SPLIT = ",";
+
+    /**
+     * 空参
+     */
+    public static final String PARAM_EMPTY = "void";
+
+
 
     /**
      * name <==> class 缓存
@@ -42,6 +52,66 @@ public class ReflectUtil {
         PRIMITIVE_CLASS_MAP.put("long",long.class);
         PRIMITIVE_CLASS_MAP.put("void",Void.TYPE);
     }
+
+    /**
+     * 方法参数字符串，以逗号分隔。如果没有参数，用void表示
+     * @param method
+     * @return
+     */
+    public static String getMethodParamDesc(Method method){
+        Class<?>[] parameterTypes = method.getParameterTypes();
+        if(parameterTypes == null || parameterTypes.length == 0){
+            return StringUtils.EMPTY;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (Class<?> clazz : parameterTypes){
+            String className = getName(clazz);
+            sb.append(className).append(PARAM_CLASS_SPLIT);
+        }
+        return sb.substring(0,sb.length() - 1);
+    }
+
+    /**
+     * 将Class转为字符串
+     * @param clazz
+     * @return
+     */
+    public static String getName(Class<?> clazz) {
+        if(clazz == null){
+            return null;
+        }
+
+        if(class2Name.get(clazz) != null){
+            return class2Name.get(clazz);
+        }
+
+        String className = getNameWithoutCache(clazz);
+        class2Name.put(clazz,className);
+
+        return className;
+
+    }
+
+    /**
+     * Class转为className，注意这里需要对数组进行处理
+     * @param clazz
+     * @return
+     */
+    private static String getNameWithoutCache(Class<?> clazz) {
+        if(!clazz.isArray()){
+            return clazz.getName();
+        }
+
+        StringBuilder sb = new StringBuilder();
+        while (clazz.isArray()){
+            sb.append("[]");
+            clazz = clazz.getComponentType();
+        }
+
+        return clazz.getName() +sb.toString();
+    }
+
 
     /**
      * 类型名称转成 Class
