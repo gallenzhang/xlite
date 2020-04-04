@@ -1,8 +1,10 @@
-package com.xlite.rpc;
+package com.xlite.protocol.exporter;
+
+import com.xlite.rpc.Invoker;
 
 /**
  * <p>
- *
+ * exporter
  * </p>
  *
  * @author gallenzhang
@@ -20,4 +22,15 @@ public interface Exporter<T> {
      * unexport
      */
     void unexport();
+
+    /**
+     * init
+     */
+    void init();
+
+    /**
+     * is available
+     * @return
+     */
+    boolean isAvailable();
 }

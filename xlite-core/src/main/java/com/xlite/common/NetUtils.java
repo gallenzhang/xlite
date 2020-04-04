@@ -24,8 +24,13 @@ import java.net.UnknownHostException;
 import java.util.Enumeration;
 
 /**
- * IP and Port Helper for RPC
- */
+ * <p>
+ * 获取IP工具类
+ * </p>
+ *
+ * @author gallenzhang
+ * @since 2020/4/1
+ **/
 public class NetUtils {
 
 

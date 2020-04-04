@@ -1,7 +1,7 @@
 package com.xlite.config;
 
 import com.xlite.protocol.XliteProtocol;
-import com.xlite.rpc.Exporter;
+import com.xlite.protocol.exporter.Exporter;
 import com.xlite.rpc.Invoker;
 import com.xlite.rpc.Protocol;
 import com.xlite.rpc.ProxyFactory;
