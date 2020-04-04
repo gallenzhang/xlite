@@ -62,4 +62,16 @@ public class XliteConstant {
      */
     public static final int DEFAULT_MAX_IDLE_TIME = 60 * 1000;
 
+    /**
+     * host
+     */
+    public static final String HOST = "host";
+
+    /**
+     * content length
+     */
+    public static final String CONTENT_LENGTH = "Content-Length";
+
+
+
 }

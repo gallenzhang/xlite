@@ -44,7 +44,7 @@ public class RpcInvocation implements Invocation,Serializable {
         this.methodName = methodName;
         this.parameterTypes = parameterTypes == null ? new Class<?>[0] : parameterTypes;
         this.arguments = arguments == null ? new Object[0] : arguments;
-        this.attachments = attachments == null ? new HashMap<String, String>() : attachments;
+        this.attachments = attachments == null ? new HashMap<>() : attachments;
     }
 
     @Override

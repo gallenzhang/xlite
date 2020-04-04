@@ -42,4 +42,11 @@ public interface Response {
      */
     Object recreate() throws Throwable;
 
+    /**
+     * 设置附加值
+     * @param key
+     * @param value
+     */
+    void setAttachment(String key,String value);
+
 }

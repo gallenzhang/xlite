@@ -16,11 +16,7 @@
  */
 package com.xlite.common;
 
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.Enumeration;
 
 /**
@@ -61,4 +57,23 @@ public class NetUtils {
             return null;
         }
     }
+
+    /**
+     * 获取IP
+     * @param socketAddress
+     * @return
+     */
+    public static String getHostAddress(SocketAddress socketAddress){
+        if(socketAddress == null){
+            return null;
+        }
+
+        if(socketAddress instanceof InetSocketAddress){
+            InetSocketAddress inetSocketAddress = (InetSocketAddress) socketAddress;
+            return inetSocketAddress.getAddress().getHostAddress();
+        }
+
+        return null;
+    }
+
 }

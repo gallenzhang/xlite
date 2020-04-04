@@ -146,8 +146,6 @@ public class RpcRequest implements Request ,Serializable {
                 ", interfaceName='" + interfaceName + '\'' +
                 ", methodName='" + methodName + '\'' +
                 ", parametersDesc='" + parametersDesc + '\'' +
-                ", arguments=" + Arrays.toString(arguments) +
-                ", attachments=" + attachments +
                 '}';
     }
 }

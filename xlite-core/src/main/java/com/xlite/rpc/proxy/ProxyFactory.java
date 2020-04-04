@@ -2,7 +2,7 @@ package com.xlite.rpc;
 
 /**
  * <p>
- *
+ * 代理工厂接口
  * </p>
  *
  * @author gallenzhang

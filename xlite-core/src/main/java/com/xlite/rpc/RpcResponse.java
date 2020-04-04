@@ -3,6 +3,8 @@ package com.xlite.rpc;
 import com.xlite.remoting.exchange.Response;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -34,6 +36,11 @@ public class RpcResponse implements Response, Serializable {
      * 响应时间
      */
     private long processTime;
+
+    /**
+     * 附加参数
+     */
+    private Map<String, String> attachments;
 
     public RpcResponse(){
 
@@ -90,6 +97,15 @@ public class RpcResponse implements Response, Serializable {
             return value;
         }
         throw exception;
+    }
+
+    @Override
+    public void setAttachment(String key, String value) {
+        if(attachments == null){
+            attachments = new HashMap<>();
+        }
+
+        this.attachments.put(key,value);
     }
 
     public void setProcessTime(long processTime) {
