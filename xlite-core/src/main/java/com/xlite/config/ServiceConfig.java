@@ -4,7 +4,7 @@ import com.xlite.protocol.XliteProtocol;
 import com.xlite.protocol.exporter.Exporter;
 import com.xlite.rpc.Invoker;
 import com.xlite.rpc.Protocol;
-import com.xlite.rpc.ProxyFactory;
+import com.xlite.rpc.proxy.ProxyFactory;
 import com.xlite.rpc.proxy.impl.JdkProxyFactory;
 
 

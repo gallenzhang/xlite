@@ -46,6 +46,12 @@ public interface Channel {
     void close();
 
     /**
+     * is closed
+     * @return
+     */
+    boolean isClosed();
+
+    /**
      * available status
      * @return
      */

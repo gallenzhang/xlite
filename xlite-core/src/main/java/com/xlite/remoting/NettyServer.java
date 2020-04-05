@@ -3,6 +3,7 @@ package com.xlite.remoting;
 import com.xlite.codec.NettyDecoder;
 import com.xlite.codec.NettyEncoder;
 import com.xlite.codec.XliteFrameDecoder;
+import com.xlite.common.ChannelState;
 import com.xlite.common.XliteConstant;
 import com.xlite.remoting.exchange.Request;
 import com.xlite.remoting.exchange.Response;
@@ -82,7 +83,7 @@ public class NettyServer extends AbstractServer {
         }
 
         channelManage = new NettyServerChannelManage(XliteConstant.MAX_SERVER_CONNECTION);
-        final NettyServerHandler handler = new NettyServerHandler(workThreadPool,messageHandler,NettyServer.this);
+        final NettyChannelHandler handler = new NettyChannelHandler(NettyServer.this,messageHandler,workThreadPool);
 
         bootstrap.group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
@@ -106,6 +107,7 @@ public class NettyServer extends AbstractServer {
         channelFuture.syncUninterruptibly();
         channel = channelFuture.channel();
 
+        state = ChannelState.ALIVE;
         return true;
     }
 
@@ -119,10 +121,17 @@ public class NettyServer extends AbstractServer {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }
+
+        state = ChannelState.CLOSE;
+    }
+
+    @Override
+    public boolean isClosed() {
+        return state.isCloseState();
     }
 
     @Override
     public boolean isAvailable() {
-        return channel.isActive();
+        return state.isAliveState();
     }
 }

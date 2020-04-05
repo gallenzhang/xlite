@@ -42,8 +42,17 @@ public abstract class AbstractProtocol implements Protocol{
     }
 
     @Override
-    public <T> Invoker<T> refer(Class<T> type) {
-        return null;
+    public <T> Invoker<T> refer(Class<T> type, String url) {
+        if(url == null){
+            throw new XliteFrameworkException(this.getClass().getSimpleName() + " refer Error: url is null",XliteFrameworkException.Framework_INIT_ERROR);
+        }
+
+        if(type == null){
+            throw new XliteFrameworkException(this.getClass().getSimpleName() + "refer Error: class is null, url=" + url,
+                    XliteFrameworkException.Framework_INIT_ERROR);
+        }
+
+        return createRefer(type,url);
     }
 
     /**
@@ -61,6 +70,6 @@ public abstract class AbstractProtocol implements Protocol{
      * @param <T>
      * @return
      */
-    public abstract <T> Invoker<T> createRefer(Class<T> type);
+    public abstract <T> Invoker<T> createRefer(Class<T> type, String url);
 
 }

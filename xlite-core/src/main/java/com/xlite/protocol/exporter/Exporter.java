@@ -1,6 +1,7 @@
 package com.xlite.protocol.exporter;
 
 import com.xlite.rpc.Invoker;
+import com.xlite.rpc.Node;
 
 /**
  * <p>
@@ -10,7 +11,7 @@ import com.xlite.rpc.Invoker;
  * @author gallenzhang
  * @since 2020/4/1
  **/
-public interface Exporter<T> {
+public interface Exporter<T> extends Node {
 
     /**
      * get invoker
@@ -23,14 +24,4 @@ public interface Exporter<T> {
      */
     void unexport();
 
-    /**
-     * init
-     */
-    void init();
-
-    /**
-     * is available
-     * @return
-     */
-    boolean isAvailable();
 }

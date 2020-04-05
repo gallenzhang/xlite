@@ -47,4 +47,9 @@ public abstract class AbstractExporter<T> implements Exporter<T> {
     public boolean isAvailable() {
         return available;
     }
+
+    @Override
+    public void destroy() {
+
+    }
 }

@@ -1,7 +1,7 @@
 package com.xlite.rpc.proxy.impl;
 
 import com.xlite.rpc.Invoker;
-import com.xlite.rpc.ProxyFactory;
+import com.xlite.rpc.proxy.ProxyFactory;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;

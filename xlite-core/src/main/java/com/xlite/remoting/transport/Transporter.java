@@ -22,6 +22,6 @@ public interface Transporter {
      * create remote client
      * @return
      */
-    Client createClient();
+    Client createClient(String url);
 
 }

@@ -1,5 +1,6 @@
 package com.xlite.remoting.transport.impl;
 
+import com.xlite.remoting.NettyClient;
 import com.xlite.remoting.NettyServer;
 import com.xlite.remoting.transport.Client;
 import com.xlite.remoting.transport.MessageHandler;
@@ -23,7 +24,7 @@ public class NettyTransporter implements Transporter {
     }
 
     @Override
-    public Client createClient() {
-        return null;
+    public Client createClient(String url) {
+        return new NettyClient(url);
     }
 }

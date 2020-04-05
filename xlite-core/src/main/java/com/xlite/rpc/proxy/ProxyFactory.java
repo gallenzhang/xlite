@@ -1,4 +1,7 @@
-package com.xlite.rpc;
+package com.xlite.rpc.proxy;
+
+import com.xlite.rpc.Invoker;
+import com.xlite.rpc.RpcException;
 
 /**
  * <p>
@@ -25,5 +28,5 @@ public interface ProxyFactory {
      * @param <T>
      * @return
      */
-    <T> Invoker<T> getInvoker(T proxy,Class<T> type) throws RpcException;
+    <T> Invoker<T> getInvoker(T proxy, Class<T> type) throws RpcException;
 }

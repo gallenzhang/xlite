@@ -1,5 +1,7 @@
 package com.xlite.rpc.proxy.impl;
 
+import com.xlite.remoting.exchange.Response;
+import com.xlite.rpc.Invocation;
 import com.xlite.rpc.Invoker;
 import com.xlite.rpc.RpcInvocation;
 
@@ -36,6 +38,21 @@ public class InvokerInvocationHandler implements InvocationHandler {
         if("equals".equals(methodName) && method.getParameterTypes().length == 1){
             return invoker.equals(args[0]);
         }
-        return invoker.invoke(new RpcInvocation(method,args)).recreate();
+
+        //远程调用
+        Invocation invocation = new RpcInvocation(method,args);
+        try {
+            Response response = invoker.invoke(invocation);
+
+            if(response.getException() == null){
+                return response.getValue();
+            }else {
+                throw new Exception(response.getException());
+            }
+
+        }catch (Exception e){
+            throw e;
+        }
     }
+
 }

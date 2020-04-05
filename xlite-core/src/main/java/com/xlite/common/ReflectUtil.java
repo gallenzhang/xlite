@@ -54,12 +54,21 @@ public class ReflectUtil {
     }
 
     /**
-     * 方法参数字符串，以逗号分隔。如果没有参数，用void表示
+     * 方法参数字符串，以逗号分隔。如果没有参数，用空字符串表示
      * @param method
      * @return
      */
     public static String getMethodParamDesc(Method method){
         Class<?>[] parameterTypes = method.getParameterTypes();
+        return getMethodParamDesc(parameterTypes);
+    }
+
+    /**
+     * 方法参数字符串，以逗号分隔。如果没有参数，用空字符串表示
+     * @param parameterTypes
+     * @return
+     */
+    public static String getMethodParamDesc(Class<?>[] parameterTypes){
         if(parameterTypes == null || parameterTypes.length == 0){
             return StringUtils.EMPTY;
         }

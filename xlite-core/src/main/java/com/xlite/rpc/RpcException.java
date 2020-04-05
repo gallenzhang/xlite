@@ -41,6 +41,12 @@ public final class RpcException extends RuntimeException{
     public static final int BIZ_EXCEPTION = 5;
 
     /**
+     * 服务拒绝异常
+     */
+    public static final int SERVER_REJECT = 6;
+
+
+    /**
      * 异常码
      */
     private int code;

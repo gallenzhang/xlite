@@ -1,5 +1,7 @@
 package com.xlite.demo;
 
+import java.io.Serializable;
+
 /**
  * <p>
  * PersonBean
@@ -8,7 +10,7 @@ package com.xlite.demo;
  * @author gallenzhang
  * @since 2020/4/1
  **/
-public class PersonBean {
+public class PersonBean implements Serializable {
 
     /**
      * 姓名

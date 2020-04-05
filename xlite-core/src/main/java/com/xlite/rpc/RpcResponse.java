@@ -46,6 +46,10 @@ public class RpcResponse implements Response, Serializable {
 
     }
 
+    public RpcResponse(long requestId){
+        this.requestId = requestId;
+    }
+
     public RpcResponse(Object value){
         this.value = value;
     }

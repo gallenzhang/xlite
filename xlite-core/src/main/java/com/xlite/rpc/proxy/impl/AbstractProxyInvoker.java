@@ -44,4 +44,19 @@ public abstract class AbstractProxyInvoker<T> implements Invoker<T> {
      * @return
      */
     protected abstract Object doInvoke(T proxy,String methodName,Class<?>[] parameterTypes,Object[] arguments) throws Throwable;
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void destroy() {
+
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return false;
+    }
 }

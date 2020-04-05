@@ -10,7 +10,7 @@ import com.xlite.remoting.exchange.Response;
  * @author gallenzhang
  * @since 2020/4/1
  **/
-public interface Invoker<T> {
+public interface Invoker<T> extends Node{
 
     /**
      * 服务接口

@@ -1,5 +1,7 @@
 package com.xlite.remoting.transport;
 
+import com.xlite.common.ChannelState;
+
 import java.net.InetSocketAddress;
 import java.util.Collection;
 
@@ -16,6 +18,8 @@ public abstract class AbstractServer implements Server{
     protected InetSocketAddress local;
 
     protected InetSocketAddress remote;
+
+    protected volatile ChannelState state = ChannelState.UN_INIT;
 
     @Override
     public Collection<Channel> getAllChannels() {

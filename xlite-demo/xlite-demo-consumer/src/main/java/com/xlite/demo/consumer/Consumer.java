@@ -4,6 +4,8 @@ import com.xlite.config.ReferenceConfig;
 import com.xlite.demo.DemoService;
 import com.xlite.demo.PersonBean;
 
+import java.io.IOException;
+
 /**
  * @author : gallenzhang
  * @date : 2019/9/8
@@ -11,14 +13,24 @@ import com.xlite.demo.PersonBean;
  */
 public class Consumer {
 
-    public static void main(String[] args) {
-        ReferenceConfig<DemoService> referenceConfig = new ReferenceConfig<DemoService>(DemoService.class);
-        //xlite://172.22.57.24:20360
-        referenceConfig.setUrl("172.22.57.24:20360");
+    public static void main(String[] args) throws IOException {
+        ReferenceConfig<DemoService> referenceConfig = new ReferenceConfig<>(DemoService.class);
+        referenceConfig.setDirectUrl("192.168.1.101:20660");
         DemoService demoService = referenceConfig.get();
 
-        //Rpc远程调用
-        String result = demoService.sayHello(new PersonBean("赵铁柱",30,"深圳市南山区"));
-        System.out.println("远程调用结果：" + result);
+        while (true) {
+            try {
+                Thread.sleep(2000);
+
+                // call remote method
+                String hello = demoService.sayHello("gallenzhang");
+
+                // print result
+                System.out.println(hello);
+
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        }
     }
 }

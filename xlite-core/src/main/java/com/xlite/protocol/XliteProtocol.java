@@ -2,6 +2,7 @@ package com.xlite.protocol;
 
 import com.xlite.protocol.exporter.Exporter;
 import com.xlite.protocol.exporter.impl.XliteExporter;
+import com.xlite.protocol.refer.XliteInvoker;
 import com.xlite.rpc.AbstractProtocol;
 import com.xlite.rpc.Invoker;
 
@@ -22,7 +23,7 @@ public class XliteProtocol extends AbstractProtocol {
     }
 
     @Override
-    public <T> Invoker<T> createRefer(Class<T> type) {
-        return null;
+    public <T> Invoker<T> createRefer(Class<T> type,String url) {
+        return new XliteInvoker(type,url);
     }
 }

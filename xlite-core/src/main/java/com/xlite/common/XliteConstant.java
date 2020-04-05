@@ -72,6 +72,15 @@ public class XliteConstant {
      */
     public static final String CONTENT_LENGTH = "Content-Length";
 
+    /**
+     * 默认io线程数
+     */
+    public static final int DEFAULT_IO_THREADS = Math.min(Runtime.getRuntime().availableProcessors() + 1, 32);
+
+    /**
+     * 默认调用超时时间
+     */
+    public static final int DEFAULT_INVOKE_TIME_OUT = 3000;
 
 
 }

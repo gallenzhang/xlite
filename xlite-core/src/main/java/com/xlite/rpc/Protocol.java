@@ -24,8 +24,8 @@ public interface Protocol {
     /**
      * 服务引入
      * @param type
-     * @param <T>
+     * @param url
      * @return
      */
-    <T> Invoker<T> refer(Class<T> type);
+    <T> Invoker<T> refer(Class<T> type, String url);
 }

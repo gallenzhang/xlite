@@ -1,5 +1,11 @@
 package com.xlite.config;
 
+import com.xlite.protocol.XliteProtocol;
+import com.xlite.rpc.Invoker;
+import com.xlite.rpc.Protocol;
+import com.xlite.rpc.proxy.ProxyFactory;
+import com.xlite.rpc.proxy.impl.JdkProxyFactory;
+
 /**
  * <p>
  * 服务消费者配置
@@ -18,12 +24,27 @@ public class ReferenceConfig<T> {
     /**
      * 接口实现代理
      */
-    private T ref;
+    private transient volatile T ref;
+
+    /**
+     * 初始化标识
+     */
+    private transient volatile boolean initialized;
+
+    /**
+     * xlite protocol
+     */
+    private static final Protocol refProtocol = new XliteProtocol();
+
+    /**
+     * 代理工厂
+     */
+    private static final ProxyFactory proxyFactory = new JdkProxyFactory();
 
     /**
      * 点对点直连URL
      */
-    private String url;
+    private String directUrl;
 
     public ReferenceConfig(Class<T> interfaceClass) {
         this.interfaceClass = interfaceClass;
@@ -37,15 +58,15 @@ public class ReferenceConfig<T> {
         this.interfaceClass = interfaceClass;
     }
 
-    public String getUrl() {
-        return url;
+    public String getDirectUrl() {
+        return directUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setDirectUrl(String directUrl) {
+        this.directUrl = directUrl;
     }
 
-    public T get(){
+    public synchronized T get(){
         if(ref == null){
             initRef();
         }
@@ -56,6 +77,25 @@ public class ReferenceConfig<T> {
      * 实例化引用代理对象
      */
     private void initRef(){
+        if(initialized){
+            return;
+        }
 
+        initialized = true;
+
+        ref = createProxy();
     }
+
+    /**
+     * 生成动态代理
+     * @return
+     */
+    private T createProxy() {
+        Invoker<T> invoker = refProtocol.refer(interfaceClass,directUrl);
+        invoker.init();
+
+        return proxyFactory.getProxy(invoker);
+    }
+
+
 }
