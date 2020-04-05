@@ -32,9 +32,4 @@ package com.xlite.protocol;
 
 public class Xlite {
 
-    public static void main(String[] args) {
-        int a = 16909060;
-        //System.out.println(a);
-        System.out.println((byte) (a >>> 8));
-    }
 }
