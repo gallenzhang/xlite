@@ -22,7 +22,7 @@
     </licenses>
 
     <properties>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <mockito.version>2.18.3</mockito.version>
         <fastjson.version>1.2.60</fastjson.version>
         <hessian.version>4.0.38</hessian.version>
